@@ -1,0 +1,7 @@
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default rule, can be overwritten by later, more specific rules
+* @Okeanos
+
+.github/settings/** @Okeanos
+.github/workflows/settings.yml @Okeanos

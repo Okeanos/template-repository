@@ -1,0 +1,30 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = tab # https://old.reddit.com/r/javascript/comments/c8drjo/nobody_talks_about_the_real_reason_to_use_tabs/
+indent_size = tab
+trim_trailing_whitespace = true
+
+[*.{tf,md,yaml,yml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+# For Markdown additional rules _could_ be enforced here (see below), however,
+# that is done using markdown-cli2 where violations can be handled more fine-granular
+#max_line_length = 120
+trim_trailing_whitespace = false # Allow '  ' token for Markdown to create new lines
+
+# For YAML additional rules _could_ be enforced here (see below), however,
+# that is done using yamllint where violations can be handled more fine-granular
+#[*.{yaml,yml}]
+#max_line_length = 140
+
+# Add custom rules below

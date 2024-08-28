@@ -1,0 +1,13 @@
+{
+	"recommendations": [
+		"dotjoshjohnson.xml",
+		"editorconfig.editorconfig",
+		"hashicorp.terraform",
+		"mkhl.shfmt",
+		"redhat.vscode-xml",
+		"redhat.vscode-yaml",
+		"tamasfe.even-better-toml",
+		"timonwong.shellcheck",
+		"yzhang.markdown-all-in-one"
+	]
+}

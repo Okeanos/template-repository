@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://json.schemastore.org/yamllint.json
+# https://yamllint.readthedocs.io/en/stable/configuration.html#default-configuration
+---
+
+extends: default
+
+ignore-from-file: .gitignore
+
+rules:
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  comments:
+    min-spaces-from-content: 1
+  document-start: disable
+  line-length:
+    max: 140
+    level: warning
+    # prevent e.g. URLs from triggering this warning
+    allow-non-breakable-inline-mappings: true
