@@ -99,7 +99,7 @@ jobs:
       - uses: opentofu/setup-opentofu@v1
       - name: OpenTofu fmt
         id: fmt
-        run: tofu fmt -check
+        run: tofu fmt -check -diff -recursive
   taplo:
     runs-on: ubuntu-latest
     if: ${{ inputs.taplo || true }}
