@@ -4,7 +4,6 @@
 		<plugin id="com.jetbrains.sh"/>
 		<plugin id="mobi.hsz.idea.gitignore"/>
 		<plugin id="org.editorconfig.editorconfigjetbrains"/>
-		<plugin id="org.intellij.plugins.hcl"/>
 		<plugin id="org.intellij.plugins.markdown"/>
 		<plugin id="org.jetbrains.plugins.yaml"/>
 		<plugin id="org.toml.lang"/>

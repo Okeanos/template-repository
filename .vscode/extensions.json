@@ -2,7 +2,6 @@
 	"recommendations": [
 		"dotjoshjohnson.xml",
 		"editorconfig.editorconfig",
-		"hashicorp.terraform",
 		"mkhl.shfmt",
 		"redhat.vscode-xml",
 		"redhat.vscode-yaml",
