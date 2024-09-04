@@ -34,7 +34,7 @@ on:
         type: boolean
       taplo:
         description: Run taplo (TOML linter)
-        default: false
+        default: true
         type: boolean
       yamllint:
         description: Run yamllint (YAML linter)
