@@ -68,14 +68,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Gitleaks
         env:
-          GITLEAKS_VERSION: "8.18.4"
-          GITLEAKS_SHASUM: "ba6dbb656933921c775ee5a2d1c13a91046e7952e9d919f9bac4cec61d628e7d"
+          GITLEAKS_VERSION: "8.20.1"
+          GITLEAKS_SHASUM: "8c0fdf050ec8bd9f8b5f4833c6dc81f4c20cb35625418216924949a22b6030bc"
         run: |
           curl --fail --silent --show-error --location --output gitleaks.tar.gz \
             https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
           echo "${GITLEAKS_SHASUM} gitleaks.tar.gz" | sha256sum --check
           tar -xzf gitleaks.tar.gz gitleaks
-          ./gitleaks detect --verbose --redact --no-git .
+          ./gitleaks dir --verbose --redact .
   hadolint:
     runs-on: ubuntu-latest
     if: ${{ inputs.hadolint || false }}
