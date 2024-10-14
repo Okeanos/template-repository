@@ -10,7 +10,6 @@
 	gitleaks = "8.18.4"
 	hadolint = "3.1.0"
 	markdownlint-cli2 = "0.13.0"
-	opentofu = "1.8.3"
 	shellcheck = "0.10.0"
 	shfmt = "3.9.0"
 	taplo = "0.9.3"
