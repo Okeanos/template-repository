@@ -24,10 +24,6 @@ on:
         description: Run Markdown linter
         default: true
         type: boolean
-      opentofu:
-        description: Run OpenTofu (Terraform/HCL/OpenTofu linter)
-        default: false
-        type: boolean
       shellcheck:
         description: Run shellcheck (shell script linter)
         default: true
@@ -91,15 +87,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DavidAnson/markdownlint-cli2-action@v17
-  opentofu:
-    runs-on: ubuntu-latest
-    if: ${{ inputs.opentofu || false }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: opentofu/setup-opentofu@v1
-      - name: OpenTofu fmt
-        id: fmt
-        run: tofu fmt -check -diff -recursive
   shellcheck:
     runs-on: ubuntu-latest
     if: ${{ inputs.shellcheck || true }}
