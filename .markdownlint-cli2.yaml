@@ -4,3 +4,7 @@
 
 # Ignore files that are part of the gitignore
 gitignore: true
+
+ignores:
+  # handling GitHub issue templates is out of scope for now because of their special syntax
+  - .github/ISSUE_TEMPLATE/*.md
