@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+## example: script with description
+## : -e, --example: This is an example parameter
+
+# shellcheck disable=SC2034
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)
+
+source "${script_dir}/_shared"
