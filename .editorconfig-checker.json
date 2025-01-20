@@ -1,5 +1,4 @@
 {
 	"exclude": [
-		"\\.terraform\\.lock\\.hcl$"
 	]
 }
