@@ -20,6 +20,10 @@ on:
         description: Run hadolint (Dockerfile linter)
         default: false
         type: boolean
+      lychee:
+        description: Run lychee (Broken link finder)
+        default: true
+        type: boolean
       markdownlint:
         description: Run Markdown linter
         default: true
@@ -101,6 +105,29 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: "Dockerfile"
+  lychee:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.lychee || true }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          lychee_version=$(grep -F 'lychee' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
+          echo "lychee_version=${lychee_version}" >> "$GITHUB_OUTPUT"
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          format: markdown
+          jobSummary: true
+          lycheeVersion: v${{ steps.tool-versions.outputs.lychee_version }}
+          args: "--base . --cache --max-cache-age 1d ."
   markdownlint:
     runs-on: ubuntu-latest
     if: ${{ inputs.markdownlint || true }}
