@@ -127,7 +127,7 @@ jobs:
           format: markdown
           jobSummary: true
           lycheeVersion: v${{ steps.tool-versions.outputs.lychee_version }}
-          args: "--base . --cache --max-cache-age 1d ."
+          args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
     runs-on: ubuntu-latest
     if: ${{ inputs.markdownlint || true }}
