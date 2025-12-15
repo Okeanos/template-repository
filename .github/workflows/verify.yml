@@ -53,7 +53,7 @@ concurrency:
 
 jobs:
   editorconfig:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.editorconfig || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -75,7 +75,7 @@ jobs:
           tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.gitleaks || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -97,7 +97,7 @@ jobs:
           tar -xzf gitleaks.tar.gz gitleaks
           ./gitleaks dir --verbose --redact .
   hadolint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.hadolint || false }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -106,7 +106,7 @@ jobs:
         with:
           dockerfile: "Dockerfile"
   lychee:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.lychee || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -116,7 +116,7 @@ jobs:
           lychee_version=$(grep -F 'lychee' .mise.toml | cut -d '=' -f2 | cut -d '#' -f1 | xargs)
           echo "lychee_version=${lychee_version}" >> "$GITHUB_OUTPUT"
       - name: Restore lychee cache
-        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
@@ -130,13 +130,13 @@ jobs:
           lycheeVersion: v${{ steps.tool-versions.outputs.lychee_version }}
           args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.markdownlint || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      - uses: DavidAnson/markdownlint-cli2-action@30a0e04f1870d58f8d717450cc6134995f993c63 # v21.0.0
+      - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   shellcheck:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.shellcheck || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -149,7 +149,7 @@ jobs:
         with:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.taplo || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -173,7 +173,7 @@ jobs:
           ./taplo format --check --diff
           ./taplo check --default-schema-catalogs
   yamllint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     if: ${{ inputs.yamllint || true }}
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
