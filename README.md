@@ -22,3 +22,5 @@ Why use OpenTofu/Terraform? Mainly because the other options:
 
 Are either even more fragile, cannot be run locally (for verification or application), require additional/convoluted
 setup or are otherwise not easily migrated.
+
+For OpenTofu/Terraform also check out [`terraform-backend-git`](https://github.com/plumber-cd/terraform-backend-git).
