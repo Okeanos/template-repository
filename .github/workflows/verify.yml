@@ -47,6 +47,8 @@ permissions:
 
 # Cancel duplicate runs for this workflow if they happen for the same commit
 # Thus should help with duplicate runs caused by PRs, e.g. because of Renovate
+# See https://github.com/orgs/community/discussions/181292 for limitations
+# See https://github.com/orgs/community/discussions/57827 for workarounds for PR/Branch-Push duplication workarounds
 concurrency:
   group: ${{ github.workflow }}-${{ github.sha }}
   cancel-in-progress: true
@@ -54,7 +56,7 @@ concurrency:
 jobs:
   editorconfig:
     runs-on: ubuntu-slim
-    if: ${{ inputs.editorconfig || true }}
+    if: ${{ inputs.editorconfig || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -76,7 +78,7 @@ jobs:
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
     runs-on: ubuntu-slim
-    if: ${{ inputs.gitleaks || true }}
+    if: ${{ inputs.gitleaks || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -98,7 +100,7 @@ jobs:
           ./gitleaks dir --verbose --redact .
   hadolint:
     runs-on: ubuntu-slim
-    if: ${{ inputs.hadolint || false }}
+    if: ${{ inputs.hadolint || false }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Lint Dockerfile
@@ -107,7 +109,7 @@ jobs:
           dockerfile: "Dockerfile"
   lychee:
     runs-on: ubuntu-slim
-    if: ${{ inputs.lychee || true }}
+    if: ${{ inputs.lychee || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -131,13 +133,13 @@ jobs:
           args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
     runs-on: ubuntu-slim
-    if: ${{ inputs.markdownlint || true }}
+    if: ${{ inputs.markdownlint || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   shellcheck:
     runs-on: ubuntu-slim
-    if: ${{ inputs.shellcheck || true }}
+    if: ${{ inputs.shellcheck || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -150,7 +152,7 @@ jobs:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
     runs-on: ubuntu-slim
-    if: ${{ inputs.taplo || true }}
+    if: ${{ inputs.taplo || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Extract Tool Versions
@@ -174,7 +176,7 @@ jobs:
           ./taplo check --default-schema-catalogs
   yamllint:
     runs-on: ubuntu-slim
-    if: ${{ inputs.yamllint || true }}
+    if: ${{ inputs.yamllint || true }} && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - name: Run yamllint
