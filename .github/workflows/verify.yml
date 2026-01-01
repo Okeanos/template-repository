@@ -111,7 +111,7 @@ jobs:
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
     needs: is-valid-run
-    #if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -144,7 +144,7 @@ jobs:
           ./gitleaks dir --verbose --redact .
   hadolint:
     needs: is-valid-run
-    #if: ${{ ((inputs.hadolint || false) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    if: ${{ ((inputs.hadolint || false) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-latest # Docker is not available on ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
