@@ -141,7 +141,7 @@ jobs:
           echo "if input: '${IF_INPUT_VALUE}'"
         env:
           INPUT_VALUE: ${{ inputs.hadolint || false }}
-          IF_VALUE: ${{ (${{ inputs.hadolint || false }} == true) && (${{ needs.is-valid-run.outputs.result }} == 'true') }}
+          IF_VALUE: ${{ ((inputs.hadolint || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
           IF_INPUT_VALUE: (${{ inputs.hadolint || false }} == true) && (${{ needs.is-valid-run.outputs.result }} == 'true')
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@2332a7b74a6de0dda2e2221d575162eba76ba5e5 # v3.3.0
