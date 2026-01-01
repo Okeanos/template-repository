@@ -84,7 +84,7 @@ jobs:
           echo "output=${result}" >> "$GITHUB_OUTPUT"
       - name: Test result
         run: |
-          echo "result: '${{ steps.check-result.output }}'"
+          echo "result: '${{ steps.check-result.outputs.output }}'"
 
   editorconfig:
     needs: is-valid-run
