@@ -57,7 +57,7 @@ jobs:
   is-valid-run:
     runs-on: ubuntu-slim
     outputs:
-      check: ${{ steps.check-result.output }}
+      check: ${{ steps.check-result.outputs.output }}
     steps:
       - name: Check for duplicate runs
         id: check-result
@@ -121,10 +121,10 @@ jobs:
           echo "if result: '${IF_VALUE}'"
           echo "if input: '${IF_INPUT_VALUE}'"
         env:
-          NEEDS_VALUE: ${{needs.is-valid-run.outputs.check}}
+          NEEDS_VALUE: ${{ needs.is-valid-run.outputs.check }}
           INPUT_VALUE: ${{ inputs.gitleaks || true }}
           IF_VALUE: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
-          IF_INPUT_VALUE: (${{ inputs.gitleaks || true }} == true) && (${{needs.is-valid-run.outputs.check}} == 'true')
+          IF_INPUT_VALUE: (${{ inputs.gitleaks || true }} == true) && (${{ needs.is-valid-run.outputs.check }} == 'true')
       - name: Extract Tool Versions
         id: tool-versions
         run: |
