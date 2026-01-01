@@ -100,7 +100,12 @@ jobs:
           ./gitleaks dir --verbose --redact .
   hadolint:
     # Docker is not available on ubuntu-slim
-    if: ${{ inputs.hadolint || false }} == true && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)
+    if: >-
+      (${{ inputs.hadolint || false }} == true) &&
+      (
+        github.event_name != 'pull_request' ||
+        github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+      )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
