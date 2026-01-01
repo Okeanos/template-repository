@@ -111,15 +111,17 @@ jobs:
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
     needs: is-valid-run
-    if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check-result == 'true') }}
+    #if: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check-result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - run: |
           echo "inputs: '${INPUT_VALUE}'"
+          echo "needs: '${NEEDS_VALUE}'"
           echo "if result: '${IF_VALUE}'"
           echo "if input: '${IF_INPUT_VALUE}'"
         env:
+          NEEDS_VALUE: ${{ needs.is-valid-run.outputs.check-result }}
           INPUT_VALUE: ${{ inputs.gitleaks || true }}
           IF_VALUE: ${{ ((inputs.gitleaks || true) == true) && (needs.is-valid-run.outputs.check-result == 'true') }}
           IF_INPUT_VALUE: (${{ inputs.gitleaks || true }} == true) && (${{ needs.is-valid-run.outputs.check-result }} == 'true')
@@ -147,10 +149,12 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - run: |
-          echo "inputs.hadolint: '${INPUT_VALUE}'"
+          echo "inputs: '${INPUT_VALUE}'"
+          echo "needs: '${NEEDS_VALUE}'"
           echo "if result: '${IF_VALUE}'"
           echo "if input: '${IF_INPUT_VALUE}'"
         env:
+          NEEDS_VALUE: ${{ needs.is-valid-run.outputs.check-result }}
           INPUT_VALUE: ${{ inputs.hadolint || false }}
           IF_VALUE: ${{ ((inputs.hadolint || false) == true) && (needs.is-valid-run.outputs.check-result == 'true') }}
           IF_INPUT_VALUE: (${{ inputs.hadolint || false }} == true) && (${{ needs.is-valid-run.outputs.check-result }} == 'true')
