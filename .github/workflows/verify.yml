@@ -137,8 +137,10 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - run: |
           echo "inputs.hadolint: '${INPUT_VALUE}'"
+          echo "if: '${IF_VALUE}'"
         env:
           INPUT_VALUE: ${{ inputs.hadolint || false }}
+          IF_VALUE: (${{ inputs.hadolint || false }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@2332a7b74a6de0dda2e2221d575162eba76ba5e5 # v3.3.0
         with:
