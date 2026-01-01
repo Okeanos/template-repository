@@ -74,7 +74,7 @@ jobs:
             result=true
           elif [[ "${EVENT_NAME}" == 'pull_request' ]]; then
             # run if this PR was triggered from an external repo
-            if [[ "${HEAD_NAME}" != "${BASE_NAME}" ]];
+            if [[ "${HEAD_NAME}" != "${BASE_NAME}" ]]; then
               result=true
             # run if this is a PR and marked as:
             elif [[ "${PR_ACTION}" == "ready_for_review" ]] || [[ "${PR_ACTION}" =~ ^(un)?labeled$ ]] || [[ "${PR_ACTION}" == "reopened" ]]; then
@@ -84,6 +84,7 @@ jobs:
           echo "check_result=${result}" >> "$GITHUB_OUTPUT"
 
   editorconfig:
+    needs: is-valid-run
     if: (${{ inputs.editorconfig || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
@@ -106,6 +107,7 @@ jobs:
           tar -xzf editorconfig.tar.gz bin/ec-linux-amd64
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
+    needs: is-valid-run
     if: (${{ inputs.gitleaks || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
@@ -138,6 +140,7 @@ jobs:
         with:
           dockerfile: "Dockerfile"
   lychee:
+    needs: is-valid-run
     if: (${{ inputs.lychee || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
@@ -162,12 +165,14 @@ jobs:
           lycheeVersion: v${{ steps.tool-versions.outputs.lychee_version }}
           args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
+    needs: is-valid-run
     if: (${{ inputs.markdownlint || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   shellcheck:
+    needs: is-valid-run
     if: (${{ inputs.shellcheck || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
@@ -181,6 +186,7 @@ jobs:
         with:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
+    needs: is-valid-run
     if: (${{ inputs.taplo || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
@@ -205,6 +211,7 @@ jobs:
           ./taplo format --check --diff
           ./taplo check --default-schema-catalogs
   yamllint:
+    needs: is-valid-run
     if: (${{ inputs.yamllint || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
     runs-on: ubuntu-slim
     steps:
