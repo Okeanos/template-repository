@@ -78,8 +78,8 @@ jobs:
               result=true
             # run if this is a PR and marked as:
             elif [[ "${PR_ACTION}" == "ready_for_review" ]] || \
-                 [[ "${PR_ACTION}" =~ ^(un)?labeled$ ]] || \
-                 [[ "${PR_ACTION}" == "reopened" ]]; \
+                  [[ "${PR_ACTION}" =~ ^(un)?labeled$ ]] || \
+                  [[ "${PR_ACTION}" == "reopened" ]]; \
             then
               result=true
             fi
