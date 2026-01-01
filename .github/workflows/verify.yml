@@ -85,7 +85,7 @@ jobs:
 
   editorconfig:
     needs: is-valid-run
-    if: (${{ inputs.editorconfig || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.editorconfig || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -108,7 +108,7 @@ jobs:
           ./bin/ec-linux-amd64 -f github-actions
   gitleaks:
     needs: is-valid-run
-    if: (${{ inputs.gitleaks || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.gitleaks || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -131,7 +131,7 @@ jobs:
           ./gitleaks dir --verbose --redact .
   hadolint:
     needs: is-valid-run
-    if: (${{ inputs.hadolint || false }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.hadolint || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-latest # Docker is not available on ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -149,7 +149,7 @@ jobs:
           dockerfile: "Dockerfile"
   lychee:
     needs: is-valid-run
-    if: (${{ inputs.lychee || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.lychee || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -174,14 +174,14 @@ jobs:
           args: "--base . --cache --max-cache-age 21d ."
   markdownlint:
     needs: is-valid-run
-    if: (${{ inputs.markdownlint || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.markdownlint || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - uses: DavidAnson/markdownlint-cli2-action@07035fd053f7be764496c0f8d8f9f41f98305101 # v22.0.0
   shellcheck:
     needs: is-valid-run
-    if: (${{ inputs.shellcheck || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.shellcheck || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -195,7 +195,7 @@ jobs:
           version: v${{ steps.tool-versions.outputs.shellcheck_version }}
   taplo:
     needs: is-valid-run
-    if: (${{ inputs.taplo || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.taplo || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
@@ -220,7 +220,7 @@ jobs:
           ./taplo check --default-schema-catalogs
   yamllint:
     needs: is-valid-run
-    if: (${{ inputs.yamllint || true }} == 'true') && (needs.is-valid-run.outputs.result == 'true')
+    if: ${{ ((inputs.yamllint || false) == true) && (needs.is-valid-run.outputs.result == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
