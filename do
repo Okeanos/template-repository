@@ -4,6 +4,8 @@
 # MIT License https://gist.github.com/m-radzikowski/d925ac457478db14c2146deadd0020cd
 # https://betterdev.blog/minimal-safe-bash-script-template/
 
+# See also https://sharats.me/posts/shell-script-best-practices/
+
 set -Eeuo pipefail
 trap cleanup SIGINT SIGTERM ERR EXIT
 
