@@ -229,8 +229,7 @@ jobs:
           version: ${{ steps.tool-versions.outputs.tombi_version }}
           checksum: ${{ steps.tool-versions.outputs.tombi_shasum }}
       - name: Run Tombi
-        run: |
-          run: tombi lint
+        run: tombi lint
   yamllint:
     needs: is-valid-run
     if: ${{ ((inputs.yamllint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
