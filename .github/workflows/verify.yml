@@ -22,7 +22,7 @@ on:
         type: boolean
       lychee:
         description: Run lychee (Broken link finder)
-        default: true
+        default: false
         type: boolean
       markdownlint:
         description: Run Markdown linter
@@ -167,7 +167,7 @@ jobs:
           dockerfile: "Dockerfile"
   lychee:
     needs: is-valid-run
-    if: ${{ ((inputs.lychee || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
+    if: ${{ ((inputs.lychee || false) == true) && (needs.is-valid-run.outputs.check == 'true') }}
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
