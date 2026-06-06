@@ -212,8 +212,8 @@ jobs:
           curl --fail --silent --show-error --location --output tombi.tar.gz \
             https://github.com/tombi-toml/tombi/releases/download/v${TOMBI_VERSION}/tombi-cli-${TOMBI_VERSION}-x86_64-unknown-linux-musl.tar.gz
           echo "${TOMBI_SHASUM} tombi.tar.gz" | sha256sum --check
-          tar -xzf tombi.tar.gz tombi
-          ./tombi lint
+          tar -xzf tombi.tar.gz tombi-cli-${TOMBI_VERSION}-x86_64-unknown-linux-musl/tombi
+          ./tombi-cli-${TOMBI_VERSION}-x86_64-unknown-linux-musl/tombi lint
   yamllint:
     needs: is-valid-run
     if: ${{ ((inputs.yamllint || true) == true) && (needs.is-valid-run.outputs.check == 'true') }}
