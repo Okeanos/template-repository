@@ -5,10 +5,10 @@
 [tools]
 	betterleaks = { version = "1.3.1", platforms = { linux-arm64 = { checksum = "sha256:8e4145c1f4155757f4a9e1b75facc49ee67525365cde2c38373457d92e2fdc9d" }, linux-x64 = { checksum = "sha256:7b241c80204538cbb210c94514dc7cdff86430938bd7d5b6e289207959530849" } } }
 	editorconfig-checker = { version = "3.6.1", platforms = { linux-arm64 = { checksum = "sha256:a471181b0741982afa4f3dbc1e433b6caa0c5e6daad580572841884fd9957220" }, linux-x64 = { checksum = "sha256:cd32084fce5f3d49ba49697f362ac3a114989715c98819303247dd54c1f368b0" } } }
-	hadolint = "2.14.0"
-	lychee = "0.24.2"
-	markdownlint-cli2 = "0.22.1"
-	shellcheck = "0.11.0"
-	shfmt = "3.13.1"
+	hadolint = { version = "2.14.0" }
+	lychee = { version = "0.24.2" }
+	markdownlint-cli2 = { version = "0.22.1" }
+	shellcheck = { version = "0.11.0" }
+	shfmt = { version = "3.13.1" }
 	tombi = { version = "1.1.0", platforms = { linux-arm64 = { checksum = "sha256:990aa9d963cb38aaa3cb327cca07420d3af601322eff3a6fe6ab4cdc3acc776a" }, linux-x64 = { checksum = "sha256:6b01a72fbf67eb158a2efc72f7081756d87e2397054e0faf4de4b36478813342" } } }
-	yamllint = "1.38.0"
+	yamllint = { version = "1.38.0" }

@@ -220,7 +220,14 @@ jobs:
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Run yamllint
+      - name: Extract Tool Versions
+        id: tool-versions
         run: |
-          pip install yamllint
+          yamllint_version=$(yq '.tools.yamllint.version' .mise.toml)
+          echo "yamllint_version=${yamllint_version}" >> "$GITHUB_OUTPUT"
+      - name: Run yamllint
+        env:
+          YAMLLINT_VERSION: ${{ steps.tool-versions.outputs.yamllint_version }}
+        run: |
+          pip install yamllint=="${YAMLLINT_VERSION}"
           yamllint .
