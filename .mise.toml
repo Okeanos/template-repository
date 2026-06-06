@@ -1,6 +1,6 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 
-# See https://github.com/jdx/mise/blob/main/registry.toml for what is officially available
+# See https://mise-versions.jdx.dev for what is officially available
 # Everything else is just declared as a reference to keep track of it.
 [tools]
 	betterleaks = { version = "1.4.0", platforms = { linux-arm64 = { checksum = "sha256:d191eb99b057626cdaf3f83562473075f1e4823c3cb1f00e07ce7596362a3670" }, linux-x64 = { checksum = "sha256:e2cb2b909baf64f48abaf2487c1a5874751196bd9d715e4fd68f7f94b0fbf601" } } }
